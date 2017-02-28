@@ -32,7 +32,7 @@ func CreateDatabase(stub shim.ChaincodeStubInterface) error {
 	err = stub.CreateTable("UserDetails", []*shim.ColumnDefinition{
 		//&shim.ColumnDefinition{Name: "UserId", Type: shim.ColumnDefinition_STRING, Key: true},
 		&shim.ColumnDefinition{Name: "UserName", Type: shim.ColumnDefinition_STRING, Key: true},
-		&shim.ColumnDefinition{Name: "UserBank", Type: shim.ColumnDefinition_STRING, Key: true},
+		&shim.ColumnDefinition{Name: "UserBank", Type: shim.ColumnDefinition_STRING, Key: false},
 		//&shim.ColumnDefinition{Name: "UserAddress", Type: shim.ColumnDefinition_STRING, Key: false},
 		//&shim.ColumnDefinition{Name: "UserType", Type: shim.ColumnDefinition_STRING, Key: false},
 		&shim.ColumnDefinition{Name: "ContractList", Type: shim.ColumnDefinition_BYTES, Key: false},
@@ -225,8 +225,8 @@ func GetUserSpecificContractList(stub shim.ChaincodeStubInterface, UserName stri
 
 	col1 := shim.Column{Value: &shim.Column_String_{String_: UserName}}
 	columns = append(columns, col1)
-	col2 := shim.Column{Value: &shim.Column_String_{String_: UserBank}}
-	columns = append(columns, col2)
+	//col2 := shim.Column{Value: &shim.Column_String_{String_: UserBank}}
+	//columns = append(columns, col2)
 
 	row, err := stub.GetRow("UserDetails", columns)
 	if err != nil {
